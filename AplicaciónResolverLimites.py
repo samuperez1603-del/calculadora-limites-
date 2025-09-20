@@ -27,13 +27,13 @@ st.write(" Resultado:", limite)
 # --- Gráfico interactivo con Plotly ---
 f_lamb = sp.lambdify(x, f, "numpy")
 
+
 # Rango de valores (evitamos división por cero en caso de singularidades)
 X = np.linspace(punto-5, punto+5, 400)
 if f.is_constant():
   f_constant = float(f)
   f_lamb = lambda X: np.full_like(X,f_constant,dtype = float) 
-else: 
-  f_lamb = sp.lambdify (X,f, "numpy")
+else : f_lamb = sp.lambdify (X,f, "numpy")
 Y = f_lamb(X)
 
 # Rango para los ejes (más largos)
@@ -56,13 +56,13 @@ if (limite_izq != limite_der) or (not limite_izq.is_real) or (not limite_der.is_
             fig.add_trace(pgr.Scatter(
                 x=X[mask_left], y=Y[mask_left],
                 mode="lines",
-                line=dict(width=3, color="blue"),
+                line=dict(width=3, color="red"),
                 name="f(x) izquierda"
             ))
             fig.add_trace(pgr.Scatter(
                 x=X[mask_right], y=Y[mask_right],
                 mode="lines",
-                line=dict(width=3, color="green"),
+                line=dict(width=3, color="blue"),
                 name="f(x) derecha"
             ))
 else:
@@ -70,7 +70,7 @@ else:
             fig.add_trace(pgr.Scatter(
                 x=X, y=Y,
                 mode="lines",
-                line=dict(width=3, color="blue"),
+                line=dict(width=3, color="white"),
                 name="f(x)"
             ))
         # Ejes
@@ -116,11 +116,4 @@ fig.update_layout(
     yaxis=dict(title="Eje Y", zeroline=False),
 )
 
-
 st.plotly_chart(fig)
-
-
-
-
-
-
