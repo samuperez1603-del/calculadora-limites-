@@ -113,4 +113,5 @@ fig.update_layout(
 )
 
 
-str.plotly_chart(fig)
+st.plotly_chart(fig)
+
