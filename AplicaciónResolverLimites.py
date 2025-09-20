@@ -30,7 +30,7 @@ if st.button("Calcular"):
 
         # Intervalo para graficar
         amplitud = 4000
-        N = 1000000
+        N = 10000
         X = np.linspace(punto - amplitud, punto + amplitud, N)
 
         # Convertir función a numpy
@@ -177,4 +177,5 @@ if st.button("Calcular"):
         st.plotly_chart(fig, theme=None, use_container_width=True)
 
     except Exception as e:
+
         st.error(f"Error en la función ingresada: {e}")
