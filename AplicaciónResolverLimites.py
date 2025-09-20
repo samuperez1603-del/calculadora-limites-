@@ -39,8 +39,8 @@ y_min, y_max = -200, 200  # Eje Y más largo
 
 mask = np.isfinite(Y)
 
-limite_izq=sp.limit(f,x,dir='-')
-limite_der=sp.limit(f,x,dir='+')
+limite_izq=sp.limit(f,x,punto,dir='-')
+limite_der=sp.limit(f,x,punto,dir='+')
 fig=pgr.Figure()
 
 
@@ -111,5 +111,6 @@ fig.update_layout(
     xaxis=dict(title="Eje X", zeroline=False),
     yaxis=dict(title="Eje Y", zeroline=False),
 )
+
 
 str.plotly_chart(fig)
