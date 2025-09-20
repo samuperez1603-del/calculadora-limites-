@@ -24,6 +24,9 @@ limite = sp.limit(f, x, punto)
 
 st.write(" Resultado:", limite)
 
+# --- Gráfico interactivo con Plotly ---
+f_lamb = sp.lambdify(x, f, "numpy")
+
 # Rango de valores (evitamos división por cero en caso de singularidades)
 X = np.linspace(punto-5, punto+5, 400)
 if f.is_constant():
@@ -114,6 +117,7 @@ fig.update_layout(
 
 
 st.plotly_chart(fig)
+
 
 
 
