@@ -10,7 +10,7 @@ st.markdown("<h1 style='font-family:Arial'> Calculadora de Límites</h1>", unsaf
 
 transformaciones = (standard_transformations + (implicit_multiplication_application,))
 
-# Ingreso de función y punto
+#  de función y punto
 funcion_str = st.text_input(
     "Escribe tu función f(x):",
     placeholder="(x**2-1)/(x-1)",
@@ -41,7 +41,7 @@ if st.button("Calcular"):
             f_lamb = sp.lambdify(x, f, "numpy")
 
         Y = f_lamb(X)
-        Y[np.abs(Y) > 1e3] = np.nan  # evitar valores enormes
+        Y[np.abs(Y) > 100] = np.nan  # evitar valores enormes
 
         # Calcular límites laterales
         limite_izq = sp.limit(f, x, punto, dir='-')
