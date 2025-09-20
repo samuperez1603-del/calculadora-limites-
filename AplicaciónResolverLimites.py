@@ -30,7 +30,6 @@ f_lamb = sp.lambdify(x, f, "numpy")
 # Rango de valores (evitamos división por cero en caso de singularidades)
 X = np.linspace(punto-5, punto+5, 400)
 Y = f_lamb(X)
-fig = pgr.Figure()
 
 # Rango para los ejes (más largos)
 x_min, x_max = -20, 20   # Eje X más largo
@@ -114,4 +113,5 @@ fig.update_layout(
 
 
 st.plotly_chart(fig)
+
 
