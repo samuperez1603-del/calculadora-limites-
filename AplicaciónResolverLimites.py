@@ -30,7 +30,7 @@ if st.button("Calcular"):
 
         # Intervalo para graficar
         amplitud = 4000
-        N = 10000
+        N = 1000000
         X = np.linspace(punto - amplitud, punto + amplitud, N)
 
         # Convertir función a numpy
@@ -47,13 +47,14 @@ if st.button("Calcular"):
         limite_izq = sp.limit(f, x, punto, dir='-')
         limite_der = sp.limit(f, x, punto, dir='+')
 
-if np.any(np.isfinite(Y)):
+
+        if np.any(np.isfinite(Y)):
             y_min, y_max = np.nanmin(Y), np.nanmax(Y)
-if y_min == y_max:
-     y_min -= 1
-     y_max += 1
-else:
-     y_min, y_max = -10, 10
+            if y_min == y_max:
+                y_min -= 1
+                y_max += 1
+        else:
+            y_min, y_max = -10, 10
 
         # Crear figura
         fig = pgr.Figure()
@@ -103,7 +104,7 @@ else:
         )
 
         # Punto del límite
-if limite.is_real and limite.is_finite:
+        if limite.is_real and limite.is_finite:
             limite_val = float(limite)
             fig.add_trace(pgr.Scatter(
                 x=[punto], y=[limite_val],
@@ -120,7 +121,7 @@ if limite.is_real and limite.is_finite:
 
         mask = np.isfinite(Y)
 
-if (limite_izq != limite_der) or (not limite_izq.is_real) or (not limite_der.is_real):
+        if (limite_izq != limite_der) or (not limite_izq.is_real) or (not limite_der.is_real):
             # Partimos la gráfica en dos
             mask_left = X < punto
             mask_right = X > punto
@@ -137,7 +138,7 @@ if (limite_izq != limite_der) or (not limite_izq.is_real) or (not limite_der.is_
                 line=dict(width=3, color="blue"),
                 name="f(x) derecha"
             ))
-else:
+        else:
             # Una sola curva continua
             fig.add_trace(pgr.Scatter(
                 x=X, y=Y,
@@ -161,7 +162,7 @@ else:
             legend=dict(font=dict(size=14, color="black"))
         )
 
-def centrar_cam(fig, x0, y0, zoom=1):
+        def centrar_cam(fig, x0, y0, zoom=1):
             ancho = 10 / zoom   # cuanto más grande el zoom, más cerca
             alto = 6 / zoom
             fig.update_layout(
@@ -169,13 +170,11 @@ def centrar_cam(fig, x0, y0, zoom=1):
                 yaxis=dict(range=[y0 - alto/2, y0 + alto/2])
             )
 
-return fig
+            return fig
         fig = centrar_cam(fig, x0=2, y0=3, zoom=2)
         
         fig.update_layout(legend=dict(font=dict(size=14, color="black")))
         st.plotly_chart(fig, theme=None, use_container_width=True)
 
-except Exception as e:
-
+    except Exception as e:
         st.error(f"Error en la función ingresada: {e}")
-
