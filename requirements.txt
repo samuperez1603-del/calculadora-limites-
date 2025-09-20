@@ -1,2 +1,2 @@
 sympy
-plotly.graph_objects
+plotly
