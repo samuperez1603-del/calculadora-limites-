@@ -24,11 +24,12 @@ limite = sp.limit(f, x, punto)
 
 st.write(" Resultado:", limite)
 
-# --- Gráfico interactivo con Plotly ---
-f_lamb = sp.lambdify(x, f, "numpy")
-
 # Rango de valores (evitamos división por cero en caso de singularidades)
 X = np.linspace(punto-5, punto+5, 400)
+if f.is_constant():
+  f_constant = float(f)
+  f_lamb = lambda X: np.full_like(X,f_constant,dtype = float) 
+  else : f_lamb = sp.lambdify (X,f, "numpy")
 Y = f_lamb(X)
 
 # Rango para los ejes (más largos)
@@ -113,5 +114,6 @@ fig.update_layout(
 
 
 st.plotly_chart(fig)
+
 
 
